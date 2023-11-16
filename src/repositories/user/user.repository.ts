@@ -21,7 +21,6 @@ export class UserRepository {
   }
 
   async update(id: string, body: UpdateUserDto) {
-    console.log(body);
     try {
       const existingUser = await this.prismaClient.user.findFirst({
         where: { id },
