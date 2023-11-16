@@ -4,7 +4,10 @@ WORKDIR /usr/src/app
 
 COPY . .
 
+RUN npm cache clean --force
 RUN npm install
+
+RUN npx prisma generate --schema=./database/schema.prisma
 
 EXPOSE 3000
 

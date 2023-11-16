@@ -10,10 +10,14 @@ services:
       - "3000:3000"
     depends_on:
       - db
+    volumes:
+      - .:/usr/src/app
     environment:
       DATABASE_URL: mysql://username:password@db:3306/dbname
     networks:
       - nest
+    restart: on-failure
+    # command: npx prisma db push --schema=./database/schema.prisma
 
   # MySQL database
   db:
