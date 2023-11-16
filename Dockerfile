@@ -7,7 +7,7 @@ COPY . .
 RUN npm cache clean --force
 RUN npm install
 
-RUN npx prisma generate --schema=./database/schema.prisma
+RUN npx prisma generate --schema=./prisma/schema.prisma
 
 EXPOSE 3000
 
