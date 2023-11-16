@@ -50,12 +50,7 @@ export class UserRepository {
         where: { email: body.email },
       });
 
-      if (existingUser) {
-        throw new HttpException(
-          'Email already exists.',
-          HttpStatus.BAD_REQUEST,
-        );
-      }
+      if (existingUser) throw new Error('Email already exists');
 
       const hashedPassword = await bcrypt.hash(body.password, 10);
 
@@ -66,10 +61,9 @@ export class UserRepository {
         },
       });
     } catch (error) {
-      console.error(`Error creating user: ${error.message ?? error}`);
       throw new HttpException(
-        'Error creating user.',
-        HttpStatus.INTERNAL_SERVER_ERROR,
+        'Failed to create user: ' + error.message,
+        HttpStatus.BAD_REQUEST,
       );
     }
   }
