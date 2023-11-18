@@ -6,6 +6,8 @@ import {
   Patch,
   Param,
   Delete,
+  HttpStatus,
+  HttpCode,
 } from '@nestjs/common';
 import { UserService } from '../../../services/users/user.service';
 import { CreateUserDto } from '../../dto/user/create-user.dto';
@@ -19,7 +21,7 @@ import {
 
 @ApiBearerAuth()
 @ApiTags('user')
-@Controller('user')
+@Controller('users')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
@@ -69,6 +71,7 @@ export class UserController {
     status: 200,
     description: 'User data',
   })
+  @HttpCode(HttpStatus.NO_CONTENT)
   remove(@Param('id') id: string) {
     return this.userService.remove(id);
   }
