@@ -1,9 +1,11 @@
 import { Module } from '@nestjs/common';
-import { PrismaModule } from 'src/http/modules/prisma/prisma.module';
+import { PrismaModule } from 'src/prisma/prisma.module';
 import { UserModule } from 'src/http/modules/user/user.module';
+import { ConfigModule } from '@nestjs/config';
+import { AuthModule } from 'src/http/modules/auth/auth.module';
 
 @Module({
-  imports: [PrismaModule, UserModule],
+  imports: [PrismaModule, UserModule, AuthModule, ConfigModule.forRoot()],
   controllers: [],
   providers: [],
 })

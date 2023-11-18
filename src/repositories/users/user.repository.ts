@@ -2,7 +2,7 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateUserDto } from 'src/http/dto/user/create-user.dto';
 import { UpdateUserDto } from 'src/http/dto/user/update-user.dto';
 import * as bcrypt from 'bcrypt';
-import { PrismaService } from 'src/services/prisma/prisma.service';
+import { PrismaService } from '../../prisma/prisma.service';
 
 @Injectable()
 export class UserRepository {
@@ -18,6 +18,10 @@ export class UserRepository {
 
   async findAll() {
     return await this.prismaClient.user.findMany();
+  }
+
+  async findByEmail(email: string) {
+    return await this.prismaClient.user.findFirst({ where: { email } });
   }
 
   async update(id: string, body: UpdateUserDto) {
