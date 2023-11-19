@@ -29,11 +29,13 @@ model Category {
 }
 
 model List {
-  id     String  @id @default(uuid())
-  title  String
-  total  Decimal
-  created_at DateTime? @default(now())
-  updated_at DateTime? @default(now())
+  id          String    @id @default(uuid())
+  title       String
+  total       Decimal
+  user_id     String
+  category_id String
+  created_at  DateTime? @default(now())
+  updated_at  DateTime? @default(now())
 }
 
 // model Item {
