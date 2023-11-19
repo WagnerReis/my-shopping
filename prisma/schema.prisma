@@ -31,21 +31,26 @@ model Category {
 model List {
   id          String    @id @default(uuid())
   title       String
-  total       Decimal
   user_id     String
   category_id String
+  total       Float? 
   created_at  DateTime? @default(now())
   updated_at  DateTime? @default(now())
+
+  @@map("lists")
 }
 
-// model Item {
-//   id          String   @id @default(uuid())
-//   description String
-//   quantity    Int?
-//   price       Decimal?
-//   selected    Boolean  @default(false)
-//   list        List?     @relation(fields: [listId], references: [id])
-//   listId      String?
-//   created_at DateTime? @default(now())
-//   updated_at DateTime? @default(now())
-// }
+model Item {
+  id          String    @id @default(uuid())
+  description String
+  quantity    Int?
+  price       Float?
+  selected    Boolean   @default(false)
+  user_id     String
+  category_id String
+  list_id     String
+  created_at  DateTime? @default(now())
+  updated_at  DateTime? @default(now())
+
+  @@map("items")
+}
